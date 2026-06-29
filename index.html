@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Bid Sheet</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+
+  <h1>Bid Estimator</h1>
+
+  <!-- JOB INFO -->
+  <div class="card">
+    <h2>Job Info</h2>
+
+    <input id="jobName" placeholder="Job Name">
+    <input id="address" placeholder="Address">
+    <input id="contact" placeholder="Contact Info">
+
+    <div class="row">
+      <input id="elevators" type="number" placeholder="# Elevators">
+      <input id="groups" type="number" placeholder="# Groups">
+    </div>
+  </div>
+
+  <!-- LABOR -->
+  <div class="card">
+    <h2>Labor</h2>
+
+    <div class="row">
+      <input id="rate" type="number" placeholder="Hourly Rate">
+      <input id="weeks" type="number" placeholder="Weeks">
+      <input id="hoursPerWeek" type="number" value="40">
+    </div>
+
+    <p>Labor Hours: <span id="laborHours">0</span></p>
+    <p>Labor Cost: $<span id="laborCost">0</span></p>
+  </div>
+
+  <!-- PARTS -->
+  <div class="card">
+    <h2>Parts</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Part</th>
+          <th>Qty</th>
+          <th>Cost</th>
+          <th>Tax %</th>
+          <th>Total</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody id="partsBody"></tbody>
+    </table>
+
+    <button onclick="addPart()">+ Add Part</button>
+
+    <p>Parts Total: $<span id="partsTotal">0</span></p>
+  </div>
+
+  <!-- PROFIT -->
+  <div class="card">
+    <h2>Profit</h2>
+
+    <input id="profit" type="number" placeholder="Profit %" value="20">
+
+    <h2>Grand Total: $<span id="grandTotal">0</span></h2>
+  </div>
+
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
