@@ -36,7 +36,25 @@ function addPart() {
     calc();
 }
 
+//---- save estimate------
+function saveEstimate() {
 
+    const estimate = {
+        jobName: document.getElementById("jobName").value,
+        customer: document.getElementById("customer").value,
+        address: document.getElementById("address").value,
+        contact: document.getElementById("contact").value,
+        elevators: document.getElementById("elevators").value,
+        groups: document.getElementById("groups").value
+    };
+
+    const saved = JSON.parse(localStorage.getItem("estimates")) || [];
+    saved.push(estimate);
+
+    localStorage.setItem("estimates", JSON.stringify(saved));
+
+    alert("Estimate saved");
+}
 // ---------- CALCULATIONS ----------
 function calc() {
 
