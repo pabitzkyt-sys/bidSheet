@@ -36,6 +36,39 @@ function addPart() {
     calc();
 }
 
+//--------LOAD CUSTOMER----------
+function loadCustomersIntoDropdown() {
+
+    const select = document.getElementById("customerSelect");
+    if (!select) return;
+
+    const customers = getCustomers();
+
+    select.innerHTML = `<option value="">Select Customer</option>`;
+
+    customers.forEach((c, i) => {
+
+        const opt = document.createElement("option");
+
+        opt.value = i;
+        opt.textContent = c.name;
+
+        select.appendChild(opt);
+    });
+
+    select.addEventListener("change", () => {
+
+        const c = customers[select.value];
+
+        if (!c) return;
+
+        document.getElementById("address").value = c.address || "";
+        document.getElementById("contact").value = c.phone || "";
+    });
+}
+
+loadCustomersIntoDropdown();
+
 //---- save estimate------
 function saveEstimate() {
 
