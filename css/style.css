@@ -134,3 +134,21 @@ li {
     font-size: 13px;
     color: #cbd5e1;
 }
+
+label {
+    display: block;
+    margin-top: 12px;
+    margin-bottom: 4px;
+    color: #cbd5e1;
+    font-size: 13px;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 6px;
+    border-radius: 8px;
+    border: 1px solid #1f2937;
+    background: #0b1220;
+    color: #e5e7eb;
+}
