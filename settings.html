@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings - Bid Sheet</title>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+<header class="topbar">
+    <a href="index.html" style="color:#e5e7eb;text-decoration:none;">← Back</a>
+    <h1>Settings</h1>
+    <div class="version">System Settings</div>
+</header>
+
+<main class="dashboard">
+
+    <!-- COMPANY -->
+    <section class="recentCard">
+        <h2>Company Info</h2>
+
+        <input id="companyName" placeholder="Company Name">
+        <input id="companyPhone" placeholder="Phone">
+        <input id="companyEmail" placeholder="Email">
+        <input id="companyAddress" placeholder="Address">
+    </section>
+
+    <!-- LABOR -->
+    <section class="recentCard">
+        <h2>Labor Rates</h2>
+
+        <label>Standard Rate ($/hr)</label>
+        <input id="standardRate" type="number">
+
+        <label>Overtime Rate ($/hr)</label>
+        <input id="otRate" type="number">
+
+        <label>Double Time Rate ($/hr)</label>
+        <input id="dtRate" type="number">
+
+        <label>Hours per Week</label>
+        <input id="hoursPerWeek" type="number" value="40">
+    </section>
+
+    <!-- TAX -->
+    <section class="recentCard">
+        <h2>Tax Settings</h2>
+
+        <label>Sales Tax (%)</label>
+        <input id="taxRate" type="number">
+
+        <label>
+            <input id="taxLabor" type="checkbox">
+            Tax Labor
+        </label>
+
+        <label>
+            <input id="taxParts" type="checkbox" checked>
+            Tax Parts
+        </label>
+    </section>
+
+    <!-- PROFIT -->
+    <section class="recentCard">
+        <h2>Defaults</h2>
+
+        <label>Default Profit Margin (%)</label>
+        <input id="profitMargin" type="number">
+
+        <label>Default Overhead (%)</label>
+        <input id="overhead" type="number">
+    </section>
+
+    <button onclick="saveSettings()">💾 Save Settings</button>
+
+</main>
+
+<script src="js/settings.js"></script>
+
+</body>
+</html>
