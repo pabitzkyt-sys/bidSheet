@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Parts Library</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="topbar">
+    <a href="index.html" style="color:#fff;text-decoration:none;">← Back</a>
+    <h1>Parts Library</h1>
+</header>
+
+<main class="dashboard">
+
+    <section class="recentCard">
+        <h2>Add Part</h2>
+
+        <input id="partName" placeholder="Part Name">
+        <input id="partCost" type="number" placeholder="Cost">
+        <input id="partTax" type="number" placeholder="Tax %">
+
+        <button onclick="addPart()">Save Part</button>
+    </section>
+
+    <section class="recentCard">
+        <h2>Saved Parts</h2>
+        <ul id="partsList"></ul>
+    </section>
+
+</main>
+
+<script src="js/parts.js"></script>
+
+</body>
+</html>
