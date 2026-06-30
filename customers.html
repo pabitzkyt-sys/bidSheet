@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Customers</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="topbar">
+    <a href="index.html" style="color:#fff;text-decoration:none;">← Back</a>
+    <h1>Customers</h1>
+</header>
+
+<main class="dashboard">
+
+    <section class="recentCard">
+        <h2>Add Customer</h2>
+
+        <input id="custName" placeholder="Name">
+        <input id="custAddress" placeholder="Address">
+        <input id="custPhone" placeholder="Phone">
+
+        <button onclick="addCustomer()">Save</button>
+    </section>
+
+    <section class="recentCard">
+        <h2>Customer List</h2>
+        <ul id="customerList"></ul>
+    </section>
+
+</main>
+
+<script src="js/customers.js"></script>
+
+</body>
+</html>
