@@ -1,0 +1,136 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    background: #0b1220;
+    color: #e5e7eb;
+}
+
+/* Top bar */
+.topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 20px;
+    background: #0f172a;
+    border-bottom: 1px solid #1f2937;
+}
+
+.topbar h1 {
+    font-size: 20px;
+    letter-spacing: 0.5px;
+}
+
+.version {
+    font-size: 12px;
+    color: #94a3b8;
+}
+
+/* Layout */
+.dashboard {
+    max-width: 1000px;
+    margin: auto;
+    padding: 20px;
+}
+
+/* Welcome card */
+.welcomeCard {
+    background: #111827;
+    padding: 16px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    border: 1px solid #1f2937;
+}
+
+.welcomeCard h2 {
+    font-size: 18px;
+    margin-bottom: 6px;
+}
+
+/* Button grid */
+.buttonGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 14px;
+    margin-bottom: 20px;
+}
+
+.menuButton {
+    display: block;
+    text-decoration: none;
+    background: #111827;
+    border: 1px solid #1f2937;
+    border-radius: 14px;
+    padding: 16px;
+    transition: 0.2s;
+    color: #e5e7eb;
+}
+
+.menuButton:hover {
+    transform: translateY(-2px);
+    border-color: #3b82f6;
+    background: #0f172a;
+}
+
+.icon {
+    font-size: 26px;
+    margin-bottom: 8px;
+}
+
+.menuButton h3 {
+    font-size: 15px;
+    margin-bottom: 4px;
+}
+
+.menuButton p {
+    font-size: 12px;
+    color: #94a3b8;
+}
+
+/* Recent estimates */
+.recentCard {
+    background: #111827;
+    border: 1px solid #1f2937;
+    border-radius: 12px;
+    padding: 16px;
+}
+
+.cardHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.cardHeader h2 {
+    font-size: 16px;
+}
+
+button {
+    background: #1f2937;
+    border: 1px solid #374151;
+    color: #e5e7eb;
+    padding: 6px 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+button:hover {
+    border-color: #3b82f6;
+}
+
+ul {
+    list-style: none;
+}
+
+li {
+    padding: 8px 0;
+    border-bottom: 1px solid #1f2937;
+    font-size: 13px;
+    color: #cbd5e1;
+}
