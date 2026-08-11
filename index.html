@@ -1,96 +1,33 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-  <meta name="theme-color" content="#07111f">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <title>BidSheet</title>
-  <link rel="manifest" href="manifest.json">
-  <link rel="stylesheet" href="css/style.css">
-</head>
-<body>
-<header class="appbar">
-  <button class="iconButton" id="menuBtn" aria-label="Menu">☰</button>
-  <div class="brand"><h1><span>Bid</span>Sheet</h1><p>Elevator Estimator</p></div>
-  <div class="headActions"><button class="iconButton" id="exportQuickBtn" aria-label="Export">⇧</button><button class="iconButton" data-view="settings" aria-label="Settings">⚙</button></div>
-</header>
-
-<main>
-<section id="estimate" class="view active">
-  <div class="estimateTop">
-    <div><h2 id="estimateTitle">New Estimate</h2><p id="saveStatus">Not saved</p></div>
-    <div class="actions"><button id="printBtn" class="secondary">Print</button><button id="saveBtn" class="primary">Save Estimate</button></div>
-  </div>
-
-  <article class="panel accentBlue">
-    <h3>▣ Job Information</h3>
-    <div class="formGrid jobGrid">
-      <label class="wide">Job name<input id="jobName" placeholder="Enter job name"></label>
-      <label>Date<input id="estimateDate" type="date"></label>
-      <label class="wide">Address<input id="jobAddress" placeholder="Enter job address"></label>
-      <label>Customer<select id="customerSelect"><option value="">Select customer</option></select></label>
-      <label>Contact<input id="jobContact" placeholder="Contact name"></label>
-      <label>Phone / email<input id="jobPhone" placeholder="Phone or email"></label>
-      <label class="wide">Scope / notes<textarea id="notes" rows="3" placeholder="Describe the elevator work"></textarea></label>
-    </div>
-  </article>
-
-  <div class="twoPanels">
-    <article class="panel accentPurple">
-      <h3>▥ Elevator Scope</h3>
-      <label>Number of elevators</label>
-      <div class="stepper"><button data-step="elevators" data-dir="-1">−</button><input id="elevators" type="number" min="0" value="1"><button data-step="elevators" data-dir="1">+</button></div>
-      <label>Number of groups</label>
-      <div class="stepper"><button data-step="groups" data-dir="-1">−</button><input id="groups" type="number" min="0" value="1"><button data-step="groups" data-dir="1">+</button></div>
-    </article>
-    <article class="panel accentBlue">
-      <h3>◷ Labor Estimate</h3>
-      <label>Weeks</label>
-      <div class="stepper"><button data-step="weeks" data-dir="-.25">−</button><input id="weeks" type="number" min="0" step=".25"><button data-step="weeks" data-dir=".25">+</button></div>
-      <label>Hours per week</label>
-      <div class="stepper"><button data-step="hoursPerWeek" data-dir="-1">−</button><input id="hoursPerWeek" type="number" min="0" value="40"><button data-step="hoursPerWeek" data-dir="1">+</button></div>
-      <button id="applyWeeks" class="secondary full">Apply to regular hours</button>
-    </article>
-  </div>
-
-  <article class="panel accentGreen">
-    <h3>♙ Labor Breakdown</h3>
-    <div class="laborTable">
-      <div class="laborHead"><span>Type</span><span>Hours</span><span>Rate</span><span>Total</span></div>
-      <div class="labor-row"><b>Regular</b><input id="regularHours" type="number" min="0" step=".25"><input id="regularRate" type="number" min="0" step=".01"><output id="regularTotal">$0.00</output></div>
-      <div class="labor-row"><b>Overtime (1.5×)</b><input id="otHours" type="number" min="0" step=".25"><input id="otRate" type="number" min="0" step=".01"><output id="otTotal">$0.00</output></div>
-      <div class="labor-row"><b>Double time (2×)</b><input id="dtHours" type="number" min="0" step=".25"><input id="dtRate" type="number" min="0" step=".01"><output id="dtTotal">$0.00</output></div>
-      <div class="laborTotal"><span>Labor Total</span><strong id="laborSummary">$0.00</strong></div>
-    </div>
-  </article>
-
-  <article class="panel accentPurple">
-    <div class="sectionHead"><h3>🛒 Parts & Materials</h3><button id="addPartBtn" class="purpleButton">+ Add Part</button></div>
-    <div class="tablewrap"><table><thead><tr><th>Item</th><th>Qty</th><th>Unit Cost</th><th>Tax</th><th>Total</th><th></th></tr></thead><tbody id="estimateParts"></tbody></table></div>
-    <div id="partsEmpty" class="emptyState"><div>◇</div><b>No parts added yet</b><span>Tap “+ Add Part” to get started</span></div>
-    <div class="partsTotals"><span>Parts before tax <b id="partsBaseSummary">$0.00</b></span><span>Sales tax <b id="taxSummary">$0.00</b></span><strong>Parts Total <em id="partsTotalDisplay">$0.00</em></strong></div>
-  </article>
-
-  <article class="panel accentBlue">
-    <h3>☷ Adjustments</h3>
-    <div class="formGrid adjustGrid"><label>Overhead %<input id="overheadPct" type="number" step=".1"></label><label>Profit %<input id="profitPct" type="number" step=".1"></label><label>Discount $<input id="discount" type="number" min="0" step=".01"></label><label>Discount timing<select id="discountTiming"><option value="after">After profit</option><option value="before">Before profit</option></select></label></div>
-  </article>
-
-  <article class="totalBanner"><div><h3>Estimate Total</h3><p>Profit: <span id="profitSummary">$0.00</span> · Overhead: <span id="overheadSummary">$0.00</span> · Discount: <span id="discountSummary">-$0.00</span></p></div><strong id="grandTotal">$0.00</strong></article>
-</section>
-
-<section id="saved" class="view"><div class="pageTitle"><div><h2>Saved Estimates</h2><p>Stored on this device</p></div><button id="newEstimateBtn" class="primary">+ New Estimate</button></div><div id="savedList" class="list"></div></section>
-<section id="customers" class="view"><div class="pageTitle"><div><h2>Customers</h2><p>Tap a customer to edit</p></div><button id="addCustomerBtn" class="primary">+ Add Customer</button></div><div id="customerList" class="list"></div></section>
-<section id="parts" class="view"><div class="pageTitle"><div><h2>Parts Library</h2><p>Reusable material pricing</p></div><button id="addLibraryPartBtn" class="primary">+ Add Part</button></div><div id="partsList" class="list"></div></section>
-<section id="settings" class="view"><div class="pageTitle"><div><h2>Settings</h2><p>Defaults for new estimates</p></div><button id="saveSettingsBtn" class="primary">Save Settings</button></div><article class="panel"><h3>Company</h3><label>Company name<input id="companyName"></label><div class="formGrid"><label>Phone<input id="companyPhone"></label><label>Email<input id="companyEmail"></label></div><label>Address<textarea id="companyAddress" rows="2"></textarea></label></article><article class="panel"><h3>Default Rates</h3><div class="formGrid"><label>Regular rate<input id="settingRegularRate" type="number"></label><label>Overtime rate<input id="settingOtRate" type="number"></label><label>Double-time rate<input id="settingDtRate" type="number"></label><label>Hours/week<input id="settingHoursWeek" type="number"></label><label>Sales tax %<input id="settingTaxRate" type="number"></label><label>Profit %<input id="settingProfit" type="number"></label><label>Overhead %<input id="settingOverhead" type="number"></label></div><label class="check"><input id="settingTaxLabor" type="checkbox"> Apply sales tax to labor</label></article><article class="panel danger"><h3>Backup & Data</h3><div class="buttonRow"><button id="exportBtn">Export Backup</button><label class="filebtn">Import Backup<input id="importInput" type="file" accept="application/json"></label><button id="clearAllBtn" class="dangerButton">Erase All Data</button></div></article></section>
-</main>
-
-<nav class="bottomNav" aria-label="Main navigation"><button data-view="estimate" class="active"><span>▣</span>Estimate</button><button data-view="saved"><span>▱</span>Saved</button><button data-view="customers"><span>♙</span>Customers</button><button data-view="parts"><span>◇</span>Parts</button><button data-view="settings"><span>⚙</span>Settings</button></nav>
-
-<dialog id="editorDialog"><form method="dialog" id="editorForm"><h3 id="dialogTitle"></h3><div id="dialogFields"></div><div class="dialogActions"><button value="cancel">Cancel</button><button id="dialogSave" value="default" class="primary">Save</button></div></form></dialog>
-<div id="toast" role="status"></div>
-<script src="js/app.js"></script>
-</body>
-</html>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<meta name="theme-color" content="#101820"><title>Ruin Rush</title>
+<style>
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#0d1519;font-family:system-ui,-apple-system,sans-serif;touch-action:none}canvas{display:block;width:100%;height:100%}.hud{position:fixed;inset:0;pointer-events:none;color:white;text-shadow:0 2px 4px #000}.top{display:flex;justify-content:space-between;padding:max(14px,env(safe-area-inset-top)) 16px 0;font-weight:900;font-size:18px}.coin{color:#ffd54a}.center{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:#0007;pointer-events:auto}.card{width:min(88vw,420px);padding:28px 24px;border-radius:24px;background:#101820e8;border:1px solid #ffffff26;text-align:center;box-shadow:0 20px 60px #0008}.card h1{font-size:44px;margin:0 0 8px;letter-spacing:-2px}.card p{color:#d4dde1;margin:8px 0 20px;line-height:1.4}.btn{border:0;border-radius:16px;background:#ffb000;color:#17120a;font-size:20px;font-weight:900;padding:15px 30px;box-shadow:0 6px 0 #9c6c00}.btn:active{transform:translateY(3px);box-shadow:0 3px 0 #9c6c00}.help{font-size:13px!important;color:#aab8be!important}.hidden{display:none}.flash{position:fixed;inset:0;background:#fff;opacity:0;pointer-events:none}.pause{position:fixed;right:14px;bottom:max(14px,env(safe-area-inset-bottom));width:46px;height:46px;border-radius:50%;border:1px solid #fff4;background:#0007;color:#fff;font-size:18px;pointer-events:auto}
+</style></head>
+<body><canvas id="c"></canvas><div class="hud"><div class="top"><div>RUN <span id="score">0</span>m</div><div class="coin">● <span id="coins">0</span></div></div></div>
+<div id="menu" class="center"><div class="card"><h1>RUIN RUSH</h1><p>Escape the crumbling jungle ruins. Dodge traps, leap barriers and grab coins.</p><button id="start" class="btn">RUN!</button><p class="help">Swipe left/right to change lanes<br>Swipe up to jump • Swipe down to slide</p><p id="best"></p></div></div><button id="pause" class="pause hidden">Ⅱ</button><div id="flash" class="flash"></div>
+<script>
+const c=document.getElementById('c'),x=c.getContext('2d'),scoreEl=document.getElementById('score'),coinEl=document.getElementById('coins'),menu=document.getElementById('menu'),startBtn=document.getElementById('start'),bestEl=document.getElementById('best'),pauseBtn=document.getElementById('pause');
+let W,H,DPR,playing=false,paused=false,last=0,t=0,speed=0.38,dist=0,coins=0,lane=0,targetLane=0,jump=0,jumpV=0,slide=0,objects=[],spawn=0,shake=0;
+const best=()=>+localStorage.rrBest||0; function resize(){DPR=Math.min(devicePixelRatio||1,2);W=innerWidth;H=innerHeight;c.width=W*DPR;c.height=H*DPR;x.setTransform(DPR,0,0,DPR,0,0)} addEventListener('resize',resize);resize();
+function road(z,l){const horizon=H*.27,bottom=H*1.05,p=Math.pow(1-z,1.55),y=horizon+(bottom-horizon)*p,half=18+(W*.54-18)*p;return {x:W/2+l*half*.56,y,scale:.12+p*1.15,half,p}}
+function reset(){playing=true;paused=false;t=dist=coins=0;speed=.38;lane=targetLane=0;jump=jumpV=slide=0;objects=[];spawn=.4;menu.classList.add('hidden');pauseBtn.classList.remove('hidden');scoreEl.textContent=0;coinEl.textContent=0}
+function makeObj(){let r=Math.random(),ln=Math.floor(Math.random()*3)-1;if(r<.47){let n=2+Math.floor(Math.random()*4);for(let i=0;i<n;i++)objects.push({type:'coin',lane:ln,z:1+i*.075,got:false})}else if(r<.72)objects.push({type:'rock',lane:ln,z:1});else if(r<.9)objects.push({type:'log',lane:ln,z:1});else{let safe=Math.floor(Math.random()*3)-1;[-1,0,1].forEach(q=>{if(q!==safe)objects.push({type:Math.random()<.5?'rock':'log',lane:q,z:1})})}}
+function update(dt){if(!playing||paused)return;t+=dt;dist+=speed*dt*32;speed=Math.min(.76,.38+dist/6500);lane+=(targetLane-lane)*Math.min(1,dt*11);if(jump>0||jumpV>0){jump+=jumpV*dt;jumpV-=5.4*dt;if(jump<=0){jump=0;jumpV=0}}if(slide>0)slide-=dt;spawn-=dt*speed/.38;if(spawn<=0){makeObj();spawn=.58+Math.random()*.52}for(const o of objects){o.z-=speed*dt;if(o.z<.15&&!o.hit&&!o.got&&Math.abs(o.lane-lane)<.42){if(o.type==='coin'){o.got=true;coins++;coinEl.textContent=coins}else{let safe=o.type==='rock'?jump>.28:slide>0;if(!safe){o.hit=true;die()}}}}objects=objects.filter(o=>o.z>-.12&&!o.got);scoreEl.textContent=Math.floor(dist)}
+function die(){playing=false;shake=14;let b=Math.max(best(),Math.floor(dist));localStorage.rrBest=b;setTimeout(()=>{pauseBtn.classList.add('hidden');menu.classList.remove('hidden');menu.querySelector('h1').textContent='RUN OVER';menu.querySelector('p').innerHTML=`You made it <b>${Math.floor(dist)}m</b> and collected <b>${coins}</b> coins.`;startBtn.textContent='RUN AGAIN';bestEl.textContent='Best: '+b+'m'},280)}
+function draw(){let g=x.createLinearGradient(0,0,0,H);g.addColorStop(0,'#72b9c7');g.addColorStop(.42,'#d8c986');g.addColorStop(1,'#37502b');x.fillStyle=g;x.fillRect(0,0,W,H);x.save();if(shake>0){x.translate((Math.random()-.5)*shake,(Math.random()-.5)*shake);shake*=.84}
+// distant sun and jungle
+x.fillStyle='#ffe4a0aa';x.beginPath();x.arc(W*.78,H*.14,42,0,7);x.fill();for(let i=0;i<22;i++){let px=(i*97%W),hh=35+(i*31%90);x.fillStyle=i%2?'#294b32':'#1f3d2c';x.beginPath();x.moveTo(px-35,H*.31);x.lineTo(px,H*.31-hh);x.lineTo(px+38,H*.31);x.fill()}
+// road
+let hz=H*.27;x.fillStyle='#263d27';x.beginPath();x.moveTo(0,H);x.lineTo(W/2-22,hz);x.lineTo(W/2+22,hz);x.lineTo(W,H);x.fill();x.fillStyle='#9a7b4e';x.beginPath();x.moveTo(W/2-18,hz);x.lineTo(W/2+18,hz);x.lineTo(W*.93,H);x.lineTo(W*.07,H);x.fill();
+// lane stones perspective
+for(let k=0;k<18;k++){let z=(k/18+t*speed*.65)%1,p=road(z,0);x.fillStyle='#c3a16b55';x.fillRect(W/2-p.half*.34,p.y,p.half*.02,3+p.p*6);x.fillRect(W/2+p.half*.32,p.y,p.half*.02,3+p.p*6)}
+let sorted=[...objects].sort((a,b)=>b.z-a.z);for(const o of sorted)drawObj(o);drawPlayer();x.restore();if(paused){x.fillStyle='#0009';x.fillRect(0,0,W,H);x.fillStyle='white';x.textAlign='center';x.font='900 36px system-ui';x.fillText('PAUSED',W/2,H/2)}}
+function drawObj(o){let p=road(o.z,o.lane);if(o.z>1.12)return;let s=p.scale;if(o.type==='coin'){x.save();x.translate(p.x,p.y-22*s);x.scale(s,s);x.fillStyle='#ffca28';x.beginPath();x.ellipse(0,0,10+Math.sin(t*9+o.z)*3,15,0,0,7);x.fill();x.strokeStyle='#fff0a0';x.lineWidth=2;x.stroke();x.restore()}else if(o.type==='rock'){x.save();x.translate(p.x,p.y);x.scale(s,s);x.fillStyle='#4d4b46';x.beginPath();x.moveTo(-22,0);x.lineTo(-16,-30);x.lineTo(4,-42);x.lineTo(25,-20);x.lineTo(20,0);x.fill();x.fillStyle='#6f6a60';x.beginPath();x.moveTo(-16,-30);x.lineTo(4,-42);x.lineTo(8,-16);x.fill();x.restore()}else{x.save();x.translate(p.x,p.y-35*s);x.scale(s,s);x.fillStyle='#51351e';x.fillRect(-34,-8,68,16);x.fillStyle='#7b512c';x.fillRect(-30,-6,60,5);x.fillStyle='#382313';x.fillRect(-31,8,7,30);x.fillRect(24,8,7,30);x.restore()}}
+function drawPlayer(){let base=road(0,lane),py=H*.83-jump*H*.45+(slide>0?18:0),s=Math.min(1.25,W/390);x.save();x.translate(base.x,py);x.scale(s,s);if(slide>0){x.rotate(-.22);x.fillStyle='#17232a';x.fillRect(-25,-28,50,25);x.fillStyle='#d49a6a';x.beginPath();x.arc(25,-23,12,0,7);x.fill();x.fillStyle='#b6422f';x.fillRect(-31,-11,58,13)}else{x.fillStyle='#17232a';x.fillRect(-13,-55,26,40);x.fillStyle='#d49a6a';x.beginPath();x.arc(0,-68,13,0,7);x.fill();x.fillStyle='#b6422f';x.fillRect(-17,-48,34,29);let run=Math.sin(t*14)*12;x.strokeStyle='#20282b';x.lineWidth=9;x.lineCap='round';x.beginPath();x.moveTo(-6,-16);x.lineTo(-10+run,9);x.moveTo(6,-16);x.lineTo(10-run,9);x.stroke()}x.restore()}
+function loop(ts){let dt=Math.min(.035,(ts-last)/1000||0);last=ts;update(dt);draw();requestAnimationFrame(loop)}requestAnimationFrame(loop);
+function action(a){if(!playing||paused)return;if(a==='left')targetLane=Math.max(-1,targetLane-1);if(a==='right')targetLane=Math.min(1,targetLane+1);if(a==='up'&&jump===0){jumpV=2.25;slide=0}if(a==='down'&&jump===0)slide=.72}
+let sx=0,sy=0;addEventListener('pointerdown',e=>{sx=e.clientX;sy=e.clientY});addEventListener('pointerup',e=>{let dx=e.clientX-sx,dy=e.clientY-sy;if(Math.max(Math.abs(dx),Math.abs(dy))<24)return;if(Math.abs(dx)>Math.abs(dy))action(dx>0?'right':'left');else action(dy>0?'down':'up')});addEventListener('keydown',e=>{if(e.key==='ArrowLeft')action('left');if(e.key==='ArrowRight')action('right');if(e.key==='ArrowUp'||e.key===' ')action('up');if(e.key==='ArrowDown')action('down')});startBtn.onclick=()=>{menu.querySelector('h1').textContent='RUIN RUSH';reset()};pauseBtn.onclick=()=>{paused=!paused;pauseBtn.textContent=paused?'▶':'Ⅱ'};bestEl.textContent=best()?'Best: '+best()+'m':'';
+</script></body></html>
